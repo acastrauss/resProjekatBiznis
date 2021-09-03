@@ -75,8 +75,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BPCRUD.cs" />
     <Compile Include="Drzava.cs" />
     <Compile Include="Drzave.cs" />
+    <Compile Include="IBPCRUD.cs" />
     <Compile Include="KratkiNaziviDrzava.cs" />
     <Compile Include="Potrosnja.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +87,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Modeli\Modeli.csproj">
+      <Project>{8b50abc9-5379-45e0-b0ee-9565dacdacae}</Project>
+      <Name>Modeli</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

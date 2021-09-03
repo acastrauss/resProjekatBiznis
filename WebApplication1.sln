@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{48BA494E-48E9-4BBE-80C0-D1F065842D02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "DatabaseAccess\Database.csproj", "{1990C284-E9C4-49D1-A892-3165F0DDF95F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BazaPodataka", "DatabaseAccess\BazaPodataka.csproj", "{1990C284-E9C4-49D1-A892-3165F0DDF95F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modeli", "Modeli\Modeli.csproj", "{8B50ABC9-5379-45E0-B0EE-9565DACDACAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1990C284-E9C4-49D1-A892-3165F0DDF95F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1990C284-E9C4-49D1-A892-3165F0DDF95F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1990C284-E9C4-49D1-A892-3165F0DDF95F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B50ABC9-5379-45E0-B0EE-9565DACDACAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B50ABC9-5379-45E0-B0EE-9565DACDACAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B50ABC9-5379-45E0-B0EE-9565DACDACAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B50ABC9-5379-45E0-B0EE-9565DACDACAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
