@@ -1,0 +1,14 @@
+D:\res_Projekat_Biznis\WebApplication1\Modeli\bin\Debug\Modeli.dll.config
+D:\res_Projekat_Biznis\WebApplication1\Modeli\bin\Debug\Modeli.dll
+D:\res_Projekat_Biznis\WebApplication1\Modeli\bin\Debug\Modeli.pdb
+D:\res_Projekat_Biznis\WebApplication1\Modeli\bin\Debug\EntityFramework.dll
+D:\res_Projekat_Biznis\WebApplication1\Modeli\bin\Debug\EntityFramework.SqlServer.dll
+D:\res_Projekat_Biznis\WebApplication1\Modeli\bin\Debug\EntityFrameworkExtension.dll
+D:\res_Projekat_Biznis\WebApplication1\Modeli\bin\Debug\System.Data.Entity.dll
+D:\res_Projekat_Biznis\WebApplication1\Modeli\bin\Debug\EntityFramework.xml
+D:\res_Projekat_Biznis\WebApplication1\Modeli\bin\Debug\EntityFramework.SqlServer.xml
+D:\res_Projekat_Biznis\WebApplication1\Modeli\obj\Debug\Modeli.csprojAssemblyReference.cache
+D:\res_Projekat_Biznis\WebApplication1\Modeli\obj\Debug\Modeli.csproj.CoreCompileInputs.cache
+D:\res_Projekat_Biznis\WebApplication1\Modeli\obj\Debug\Modeli.csproj.CopyComplete
+D:\res_Projekat_Biznis\WebApplication1\Modeli\obj\Debug\Modeli.dll
+D:\res_Projekat_Biznis\WebApplication1\Modeli\obj\Debug\Modeli.pdb

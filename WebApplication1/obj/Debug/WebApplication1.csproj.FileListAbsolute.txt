@@ -201,3 +201,14 @@ D:\res_Projekat_Biznis\WebApplication1\WebApplication1\obj\Debug\WebApplication1
 D:\res_Projekat_Biznis\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csproj.CopyComplete
 D:\res_Projekat_Biznis\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
 D:\res_Projekat_Biznis\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\Logika.dll
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\Modeli.dll
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\Logika.pdb
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\Modeli.pdb
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\Modeli.dll.config
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\Logika.dll.config
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\EntityFrameworkExtension.dll
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\System.Data.Entity.dll
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\BazaPodataka.dll
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\BazaPodataka.pdb
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\BazaPodataka.dll.config

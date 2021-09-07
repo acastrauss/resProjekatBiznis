@@ -1,0 +1,17 @@
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\BazaPodataka.dll.config
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\BazaPodataka.dll
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\BazaPodataka.pdb
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\EntityFramework.dll
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\EntityFramework.SqlServer.dll
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\EntityFrameworkExtension.dll
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\Modeli.dll
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\System.Data.Entity.dll
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\Modeli.pdb
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\Modeli.dll.config
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\EntityFramework.xml
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\EntityFramework.SqlServer.xml
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\obj\Debug\BazaPodataka.csprojAssemblyReference.cache
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\obj\Debug\BazaPodataka.csproj.CoreCompileInputs.cache
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\obj\Debug\BazaPodataka.csproj.CopyComplete
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\obj\Debug\BazaPodataka.dll
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\obj\Debug\BazaPodataka.pdb
