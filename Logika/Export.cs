@@ -11,8 +11,7 @@ namespace Logika
     public class Export : IExport
     {
         public string SaveData(IEnumerable<PodaciZaPrikaz> podaci, string[] prikazaneKolone)
-        {
-                   
+        {           
             var putanja = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase); 
             string a = "Output_" + DateTime.Now.ToString("yyy_MM_d_HH_mm") + ".csv";
             string[] kombinovano = { @putanja, a };

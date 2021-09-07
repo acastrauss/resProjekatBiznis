@@ -27,7 +27,7 @@ namespace Logika
                         Pritisak = v.AtmosferskiPritisak,
                         Temperatura = v.Temperatura,
                         VlaznostVazduha = v.VlaznostVazduha,
-                        KolicinaEnergije = 0
+                        KolicinaEnergije = null
                     };
 
                     jednaDrzava.Add(pzp);
@@ -51,10 +51,10 @@ namespace Logika
                             KolicinaEnergije = p.Kolicina,
                             DatumUTC = p.DatumUTC,
                             NazivDrzave = d.Naziv,
-                            BrzinaVetra = 0,
-                            Pritisak = 0,
-                            Temperatura = 0,
-                            VlaznostVazduha = 0
+                            BrzinaVetra = null,
+                            Pritisak = null,
+                            Temperatura = null,
+                            VlaznostVazduha = null
                         };
 
                         drzavaPotrosnje.Add(pzp);

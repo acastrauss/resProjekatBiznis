@@ -8,13 +8,13 @@ namespace Modeli.WebModeli
 {
     public class PodaciZaPrikaz
     {
-        public string NazivDrzave { get; set; }
-        public DateTime DatumUTC { get; set; }
-        public double KolicinaEnergije { get; set; }
-        public int Temperatura { get; set; }
-        public double Pritisak { get; set; }
-        public int VlaznostVazduha { get; set; }
-        public int BrzinaVetra { get; set; }
+        public String NazivDrzave { get; set; }
+        public DateTime? DatumUTC { get; set; }
+        public double? KolicinaEnergije { get; set; }
+        public int? Temperatura { get; set; }
+        public double? Pritisak { get; set; }
+        public int? VlaznostVazduha { get; set; }
+        public int? BrzinaVetra { get; set; }
 
         public PodaciZaPrikaz() { }
 
