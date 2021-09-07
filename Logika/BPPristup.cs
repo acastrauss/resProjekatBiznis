@@ -10,6 +10,19 @@ namespace Logika
 {
     public class BPPristup : IBPPristup
     {
+        public DrzavaWeb DrzavaPoImenu(string naziv)
+        {
+            IBPCRUD bp = new BPCRUD();
+
+            return bp.DrzavaPoImenu(naziv);
+        }
+
+        public IEnumerable<string> NaziviDrzava()
+        {
+            IBPCRUD bp = new BPCRUD();
+
+            return bp.NaziviDrzava();
+        }
 
         public IEnumerable<DrzavaWeb> SveDrzave()
         {
@@ -17,5 +30,7 @@ namespace Logika
 
             return bp.SveDrzave();
         }
+
+
     }
 }

@@ -61,6 +61,8 @@
     <Compile Include="Export.cs" />
     <Compile Include="IBPPristup.cs" />
     <Compile Include="IExport.cs" />
+    <Compile Include="IKonverzija.cs" />
+    <Compile Include="Konverzija.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

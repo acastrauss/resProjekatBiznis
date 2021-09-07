@@ -31,5 +31,6 @@ namespace BazaPodataka
         PotrsonjaWeb BPuWebPotrosnja(Potrosnja drzava);
         Potrosnja WebuBPPotrosnja(PotrsonjaWeb drzava);
 
+        IEnumerable<String> NaziviDrzava();
     }
 }

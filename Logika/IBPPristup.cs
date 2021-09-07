@@ -10,5 +10,8 @@ namespace Logika
     public interface IBPPristup
     {
         IEnumerable<DrzavaWeb> SveDrzave();
+        IEnumerable<String> NaziviDrzava();
+
+        DrzavaWeb DrzavaPoImenu(String naziv);
     }
 }

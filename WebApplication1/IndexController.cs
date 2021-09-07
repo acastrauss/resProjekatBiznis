@@ -23,60 +23,35 @@ namespace WebApplication1
         [Route("api/Index/GetAllData")]
         public IEnumerable<PodaciZaPrikaz> GetAllData()
         {
-            List<PodaciZaPrikaz> allData = new List<PodaciZaPrikaz>();
-
             IBPPristup bPPristup = new BPPristup();
             List<PodaciZaPrikaz> podaci = new List<PodaciZaPrikaz>();
             var sveDrzave = bPPristup.SveDrzave();
 
-            sveDrzave.ToList().ForEach(x =>
-            {
-                x.Potrosnje.ForEach(y =>
-                {
-                    var pzp = new PodaciZaPrikaz()
-                    {
-                        DatumUTC = y.DatumUTC,
-                        KolicinaEnergije = y.Kolicina,
-                        NazivDrzave = x.Naziv
-                    };
-                    podaci.Add(pzp);
-                });
+            IKonverzija konv = new Konverzija();
 
-                var toAdd = new List<PodaciZaPrikaz>();
-
-                x.Vremena.ForEach(y =>
-                {
-                    var indx = podaci.FindIndex(z => z.DatumUTC.Equals(y.DatumUTC) && z.NazivDrzave.Equals(x.Naziv));
-
-                    if (indx != -1)
-                    {
-                        
-                        podaci[indx].BrzinaVetra = y.BrzinaVetra;
-                        podaci[indx].NazivDrzave = x.Naziv;
-                        podaci[indx].Pritisak = y.AtmosferskiPritisak;
-                        podaci[indx].Temperatura = y.Temperatura;
-                        podaci[indx].VlaznostVazduha = y.VlaznostVazduha;
-                    }
-                    else
-                    {
-                        var pzp = new PodaciZaPrikaz()
-                        {
-                            BrzinaVetra = y.BrzinaVetra,
-                            NazivDrzave = x.Naziv,
-                            Pritisak = y.AtmosferskiPritisak,
-                            Temperatura = y.Temperatura,
-                            VlaznostVazduha = y.VlaznostVazduha,
-                            DatumUTC = y.DatumUTC
-                        };
-
-                        toAdd.Add(pzp);
-                    }
-                });
-
-                podaci.AddRange(toAdd);
-            });
-
+            podaci = konv.ModeliZaPrikaz(sveDrzave).ToList();
+            
             return podaci;
+        }
+        
+        [HttpGet]
+        [Route("api/Index/GetNaziveDrzava")]
+        public IEnumerable<String> GetNaziveDrzava()
+        {
+            IBPPristup bPPristup = new BPPristup();
+            
+            return bPPristup.NaziviDrzava();
+        }
+        
+        [HttpGet]
+        [Route("api/Index/GetDataDrzava")]
+        public IEnumerable<PodaciZaPrikaz> GetDataDrzava(string naziv)
+        {
+            IBPPristup bPPristup = new BPPristup();
+            var drzava = bPPristup.DrzavaPoImenu(naziv);
+            IKonverzija konv = new Konverzija();
+
+            return konv.ModeliZaPrikaz(new List<DrzavaWeb>() { drzava});
         }
 
         // POST api/<controller>

@@ -62,7 +62,7 @@ namespace BazaPodataka
             var drzava = new DrzavaWeb();
 
             int id = IdZaDrzavu(imeDrzave);
-            if (id != -1)
+            if (id == -1)
                 throw new Exception("Drzava ne postoji.");
 
             using (var db = new Drzave())
@@ -82,16 +82,12 @@ namespace BazaPodataka
             var drzava = new DrzavaWeb();
 
             int id = IdZaDrzavu(imeDrzave);
-            if (id != -1)
+            if (id == -1)
                 throw new Exception("Drzava ne postoji.");
 
             using (var db = new Drzave())
             {
-                db.Potrosnjas.Where(x => x.DrzavaId == id).ToList().ForEach(
-                    x => drzava.Potrosnje.Add(this.BPuWebPotrosnja(x)));
-
-                db.Vremes.Where(x => x.DrzavaId == id).ToList().ForEach(
-                    x => drzava.Vremena.Add(this.BPuWebVreme(x)));
+                drzava = BPuWebDrzava(db.Drzavas.Where(x => x.Id == id).First());
             }
 
             return drzava;
@@ -110,9 +106,11 @@ namespace BazaPodataka
         {
             int retVal = -1;
 
+            ime = ime.Trim();
+
             using (var db = new Drzave())
             {
-                var dbModel = db.Drzavas.Where(x => x.Naziv == ime).ToList();
+                var dbModel = db.Drzavas.Where(x => x.Naziv.Trim().Equals(ime)).ToList();
 
                 if (dbModel.Count != 0)
                     retVal = dbModel.First().Id;
@@ -141,7 +139,7 @@ namespace BazaPodataka
             var retVal = new List<PotrsonjaWeb>();
 
             int id = IdZaDrzavu(imeDrzave);
-            if (id != -1)
+            if (id == -1)
                 throw new Exception("Drzava ne postoji.");
 
             using (var db = new Drzave())
@@ -158,7 +156,7 @@ namespace BazaPodataka
             var retVal = new List<PotrsonjaWeb>();
 
             int id = IdZaDrzavu(imeDrzave);
-            if (id != -1)
+            if (id == -1)
                 throw new Exception("Drzava ne postoji.");
 
             using (var db = new Drzave())
@@ -206,7 +204,7 @@ namespace BazaPodataka
             var retVal = new List<VremeWeb>();
 
             int id = IdZaDrzavu(imeDrzave);
-            if (id != -1)
+            if (id == -1)
                 throw new Exception("Drzava ne postoji.");
 
             using (var db = new Drzave())
@@ -223,7 +221,7 @@ namespace BazaPodataka
             var retVal = new List<VremeWeb>();
 
             int id = IdZaDrzavu(imeDrzave);
-            if (id != -1)
+            if (id == -1)
                 throw new Exception("Drzava ne postoji.");
 
             using (var db = new Drzave())
@@ -233,6 +231,19 @@ namespace BazaPodataka
             }
 
             return retVal;
+        }
+
+
+        public IEnumerable<string> NaziviDrzava()
+        {
+            List<String> nazivi = new List<string>();
+
+            using (var db = new Drzave())
+            {
+                db.Drzavas.ToList().ForEach(x => nazivi.Add(x.Naziv));
+            }
+
+            return nazivi;
         }
 
         public DrzavaWeb BPuWebDrzava(Drzava drzava)
