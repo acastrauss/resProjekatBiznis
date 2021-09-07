@@ -7,15 +7,31 @@ using System.Web.Http;
 using Modeli;
 using Modeli.WebModeli;
 using Logika;
+using Newtonsoft.Json;
+using System.IO;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Web;
+using System.Threading.Tasks;
 
 namespace WebApplication1
 {
     public class IndexController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        [HttpPost]
+        [Route("api/Index/GetCSVFile")]
+        public IHttpActionResult GetCSVFile([FromBody] object exportData)
         {
-            return new string[] { "value1", "value2" };
+            List<PodaciZaPrikaz> podaci = JsonConvert.DeserializeObject<List<PodaciZaPrikaz>>(exportData.ToString());
+
+            IExport export = new Export();
+
+            var fname = export.SaveData(podaci);
+
+            var alltext = File.ReadAllText(fname);
+            
+            return Ok(alltext);
         }
 
         // GET api/<controller>/5

@@ -9,6 +9,6 @@ namespace Logika
 {
     public interface IExport
     {
-        string SaveData(IEnumerable<PodaciZaPrikaz> podaci, string[] prikazaneKolone);
+        string SaveData(IEnumerable<PodaciZaPrikaz> podaci);
     }
 }

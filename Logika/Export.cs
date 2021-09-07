@@ -10,51 +10,54 @@ namespace Logika
 {
     public class Export : IExport
     {
-        public string SaveData(IEnumerable<PodaciZaPrikaz> podaci, string[] prikazaneKolone)
-        {           
-            var putanja = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase); 
+        public string SaveData(IEnumerable<PodaciZaPrikaz> podaci)
+        {
+            var putanja = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            var arr = putanja.Split('\\').ToList();
+            arr.Remove(arr.Last());
+            arr.Remove(arr.First());
+            var p = String.Join("\\", arr);
             string a = "Output_" + DateTime.Now.ToString("yyy_MM_d_HH_mm") + ".csv";
-            string[] kombinovano = { @putanja, a };
-            string putanjaPuna = System.IO.Path.Combine(kombinovano);
-            putanjaPuna = putanjaPuna.Substring(6, putanjaPuna.Length - 6);
-
+            string putanjaPuna = System.IO.Path.Combine(p, "CSVFiles", a);
+            //putanjaPuna = putanjaPuna.Substring(6, putanjaPuna.Length - 6);
+            
             using (var csvWrite = File.CreateText(putanjaPuna))
             {
                 foreach (var red in podaci)
                 {
                     string vrsta = "";
 
-                    if (prikazaneKolone.Contains("Drzava"))
+                    if (red.NazivDrzave != null)//prikazaneKolone.Contains("Drzava"))
                     {
                         string NazivDrzave = red.NazivDrzave;
                         vrsta += NazivDrzave + ",";
                     }
-                    if (prikazaneKolone.Contains("UTC vreme"))
+                    if (red.DatumUTC != null)//prikazaneKolone.Contains("UTC vreme"))
                     {
                         string Datum  = red.DatumUTC.ToString();
                         vrsta += Datum + ",";
                     }
-                    if (prikazaneKolone.Contains("Potrosnja"))
+                    if (red.KolicinaEnergije != null)//prikazaneKolone.Contains("Potrosnja"))
                     {
                         string KolicinaEnergije = red.KolicinaEnergije.ToString();
                         vrsta += KolicinaEnergije + ",";
                     }
-                    if (prikazaneKolone.Contains("Temperatura"))
+                    if (red.Temperatura != null)//prikazaneKolone.Contains("Temperatura"))
                     {
                         string Temperatura = red.Temperatura.ToString();
                         vrsta += Temperatura + ",";
                     }
-                    if (prikazaneKolone.Contains("Pritisak"))
+                    if (red.Pritisak != null)//prikazaneKolone.Contains("Pritisak"))
                     {
                         string Pritisak = red.Pritisak.ToString();
                         vrsta += Pritisak + ",";
                     }
-                    if (prikazaneKolone.Contains("Vlaznost"))
+                    if (red.VlaznostVazduha != null)//prikazaneKolone.Contains("Vlaznost"))
                     {
                         string VlaznostVazduha = red.VlaznostVazduha.ToString();
                         vrsta += VlaznostVazduha + ",";
                     }
-                    if (prikazaneKolone.Contains("Brzina vetra"))
+                    if (red.BrzinaVetra != null)//prikazaneKolone.Contains("Brzina vetra"))
                     {
                         string BrzinaVetra = red.BrzinaVetra.ToString();
                         vrsta += BrzinaVetra + ",";

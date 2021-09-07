@@ -23,46 +23,6 @@ $(document).ready(function () {
         }
     });
 
-    //$('#startDate').change(function () {
-
-    //    if (filteredData.length == 0) return;
-
-    //    let tableId = 'tableData';
-    //    let rows = $('#' + tableId).find('tr');
-    //    let startDate = new Date($('#startDate').val());
-
-    //    // skip first header row
-    //    for (let i = 1; i < rows.length; i++) {
-    //        // row with date is second
-    //        if (new Date(rows[i].children.item(1).innerHTML) < startDate) {
-    //            rows[i].remove();
-    //            filteredData.splice(i - 1);
-    //        }
-    //    }
-    //});
-
-    //$('#endDate').change(function () {
-
-    //    if (filteredData.length == 0) return;
-
-    //    let tableId = 'tableData';
-    //    let rows = $('#' + tableId).find('tr');
-    //    let endDate = new Date($('#endDate').val());
-
-    //    $('.podaciZaDrzavu').remove();
-        
-
-    //    // skip first header row
-    //    for (let i = 1; i < rows.length; i++) {
-    //        // row with date is second
-    //        let thisDate = new Date(rows[i].children.item(1).innerHTML); 
-    //        if ( thisDate > endDate) {
-    //            filteredData.splice(i - 1);
-    //            rows[i].remove();
-    //        }
-    //    }
-    //});
-
     $('.dateFilter').change(function () {
         
         if (allData.length == 0) return;
