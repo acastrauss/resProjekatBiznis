@@ -6,6 +6,7 @@
     <script src="Scripts/jquery-3.4.1.js" type="text/javascript"></script>
     <script src="Scripts/Skripte/Prikaz.js" type="text/javascript"></script>
     <script src="Scripts/Skripte/Export.js" type="text/javascript"></script>
+    <script src="Scripts/Skripte/Import.js"></script>
 </head>
 <body>
     <div id="dodajDrzavuDiv">
@@ -16,8 +17,52 @@
     <br />
     
     <div id="importDiv">
-        <input type="file" id="importFile" value="" />
-        <button id="importBtn">Import</button>
+        <table border="1px solid black">
+            <tr>
+                <th>Naziv drzava:</th>
+                <td>
+                    <select class="selectDrzava">
+                        <option disabled selected value=""> -- izaberite drzavu -- </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Pocetni datum:
+                </th>
+                <td>
+                    <input type="date" id="startDateImport" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Krajnji datum:
+                </th>
+                <td>
+                    <input type="date" id="endDateImport" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Fajl za potrosnju:
+                </th>
+                <td>
+                    <input type="file" id="importConsFile" accept=".csv, .xls, .xlsx" value="" />
+                </td>
+            </tr>
+            <tr>
+                <th>Fajlovi za vreme:</th>
+                <td>
+                    <input type="file" id="importWeatherFile" accept=".csv, .xls, .xlsx" multiple value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="importBtn">Import</button>
+                </td>
+            </tr>
+        </table>
+        
     </div>
 
     <br />
@@ -30,7 +75,7 @@
     
     <div id="selectDrzavaDiv">
         <p>Dostupne drzave:</p>
-        <select id="selectDrzava">
+        <select class="selectDrzava" id="selectDrzava">
             <option disabled selected value=""> -- izaberite drzavu -- </option>
         </select>
     </div>

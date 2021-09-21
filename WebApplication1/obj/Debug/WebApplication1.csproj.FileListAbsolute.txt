@@ -212,3 +212,6 @@ D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\System.Data.Entity.dl
 D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\BazaPodataka.dll
 D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\BazaPodataka.pdb
 D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\BazaPodataka.dll.config
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\ExcelDataReader.dll
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\ExcelDataReader.pdb
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\ExcelDataReader.xml

@@ -13,6 +13,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
 using System.Threading.Tasks;
+using ExcelDataReader;
 
 namespace WebApplication1
 {
@@ -68,6 +69,71 @@ namespace WebApplication1
             IKonverzija konv = new Konverzija();
 
             return konv.ModeliZaPrikaz(new List<DrzavaWeb>() { drzava});
+        }
+
+        [HttpPost]
+        [Route("api/Index/PostCSVFile")]
+        public async Task<IHttpActionResult> PostCSVFile()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+
+            var prov = new MultipartMemoryStreamProvider();
+            await Request.Content.ReadAsMultipartAsync(prov);
+
+            var weatherFiles = new List<String>();
+            var consFile = String.Empty;
+            
+            foreach (var f in prov.Contents)
+            {
+                var fHeader = f.Headers.ContentDisposition.FileName;
+                var name = DateTime.Now.ToString().Replace('/', '_').Replace(' ', '_').Replace(':', '_');
+
+                if(fHeader != null)
+                {
+                    if (fHeader.Contains(".xls"))
+                    {
+                        name += ".xls";
+                    }
+                    else
+                    {
+                        name += ".csv"; 
+                    }
+                }
+                else
+                {
+                    name += ".csv";
+                }
+
+                var byteArr = await f.ReadAsByteArrayAsync();
+                var mainPath = HttpContext.Current.Server.MapPath("~/SourceFiles/");
+                var pathFile = Path.Combine(mainPath, name);
+                
+                try
+                {
+                    var fstream = File.Create(pathFile);
+                    fstream.Write(byteArr, 0, byteArr.Length);
+                    fstream.Close();
+                
+                }
+                catch (Exception e)
+                {
+                    return InternalServerError(e.InnerException);
+                }
+
+                if (pathFile.EndsWith(".csv"))
+                {
+                    weatherFiles.Add(pathFile);
+                }
+                else
+                {
+                    consFile = pathFile;
+                }
+            }
+
+            // import logic
+
+            return Ok("uploaded");
         }
 
         // POST api/<controller>

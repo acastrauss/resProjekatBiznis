@@ -15,7 +15,7 @@ $(document).ready(function () {
                 let opt = document.createElement('option');
                 opt.value = x;
                 opt.innerHTML = x;
-                $('#selectDrzava').append(opt);
+                $('.selectDrzava').append(opt);
             });
         },
         error: function (error) {

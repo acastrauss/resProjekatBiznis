@@ -27,9 +27,9 @@ namespace BazaPodataka
         DrzavaWeb BPuWebDrzava(Drzava drzava);
         Drzava WebuBPDrzava(DrzavaWeb drzava);
         VremeWeb BPuWebVreme(Vreme drzava);
-        Vreme WebuBPVreme(VremeWeb drzava);
+        Vreme WebuBPVreme(VremeWeb drzava, int idDrzava);
         PotrsonjaWeb BPuWebPotrosnja(Potrosnja drzava);
-        Potrosnja WebuBPPotrosnja(PotrsonjaWeb drzava);
+        Potrosnja WebuBPPotrosnja(PotrsonjaWeb drzava, int idDrzava);
 
         IEnumerable<String> NaziviDrzava();
     }

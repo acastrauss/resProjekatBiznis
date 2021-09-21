@@ -33,7 +33,7 @@ namespace BazaPodataka
             {
                 foreach (var p in potrsonje)
                 {
-                    var dbModel = WebuBPPotrosnja(p);
+                    var dbModel = WebuBPPotrosnja(p, id);
                     dbModel.Id = id;
                     db.Potrosnjas.Add(dbModel);
                 }
@@ -50,7 +50,7 @@ namespace BazaPodataka
             {
                 foreach (var v in vremena)
                 {
-                    var dbModel = WebuBPVreme(v);
+                    var dbModel = WebuBPVreme(v, id);
                     dbModel.Id = id;
                     db.Vremes.Add(dbModel);
                 }
@@ -261,8 +261,6 @@ namespace BazaPodataka
         {
             return new PotrsonjaWeb()
             {
-                Id = drzava.Id,
-                DrzavaId = drzava.DrzavaId,
                 DatumUTC = drzava.DatumUTC,
                 Kolicina = drzava.Kolicina
             };
@@ -275,8 +273,6 @@ namespace BazaPodataka
                 AtmosferskiPritisak = drzava.AtmosferskiPritisak,
                 BrzinaVetra = drzava.BrzinaVetra,
                 DatumUTC = drzava.DatumUTC,
-                DrzavaId = drzava.DrzavaId,
-                Id = drzava.Id,
                 Temperatura = drzava.Temperatura,
                 VlaznostVazduha = drzava.VlaznostVazduha
             };
@@ -284,33 +280,36 @@ namespace BazaPodataka
 
         public Drzava WebuBPDrzava(DrzavaWeb drzava)
         {
+            var id = IdZaDrzavu(drzava.Naziv);
+
             return new Drzava()
             {
+                Id = id,
                 KratakNaziv = drzava.KratakNaziv,
                 Naziv = drzava.Naziv,
-                Potrosnjas = drzava.Potrosnje.Select(x => this.WebuBPPotrosnja(x)).ToList(),
-                Vremes = drzava.Vremena.Select(x => this.WebuBPVreme(x)).ToList()
+                Potrosnjas = drzava.Potrosnje.Select(x => this.WebuBPPotrosnja(x, id)).ToList(),
+                Vremes = drzava.Vremena.Select(x => this.WebuBPVreme(x, id)).ToList()
             };
         }
 
-        public Potrosnja WebuBPPotrosnja(PotrsonjaWeb drzava)
+        public Potrosnja WebuBPPotrosnja(PotrsonjaWeb drzava, int idDrzava)
         {
             return new Potrosnja()
             {
+                DrzavaId = idDrzava,
                 DatumUTC = drzava.DatumUTC,
-                DrzavaId = drzava.DrzavaId,
                 Kolicina = drzava.Kolicina
             };
         }
 
-        public Vreme WebuBPVreme(VremeWeb drzava)
+        public Vreme WebuBPVreme(VremeWeb drzava, int idDrzava)
         {
             return new Vreme()
             {
+                DrzavaId = idDrzava,
                 AtmosferskiPritisak = drzava.AtmosferskiPritisak,
                 BrzinaVetra = drzava.BrzinaVetra,
                 DatumUTC = drzava.DatumUTC,
-                DrzavaId = drzava.DrzavaId,
                 VlaznostVazduha = drzava.VlaznostVazduha,
                 Temperatura = drzava.Temperatura
             };
