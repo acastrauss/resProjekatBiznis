@@ -59,8 +59,11 @@
   <ItemGroup>
     <Compile Include="BPPristup.cs" />
     <Compile Include="Export.cs" />
+    <Compile Include="FilterDatum.cs" />
     <Compile Include="IBPPristup.cs" />
     <Compile Include="IExport.cs" />
+    <Compile Include="IFilterDatum.cs" />
+    <Compile Include="IFilterKolone.cs" />
     <Compile Include="IKonverzija.cs" />
     <Compile Include="Konverzija.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

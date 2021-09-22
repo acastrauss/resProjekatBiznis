@@ -27,36 +27,74 @@ $(document).ready(function () {
         
         if (allData.length == 0) return;
         filteredData = [...allData];
-        $('.podaciZaDrzavu').remove();
         let tableId = 'tableData';
-        
-        if ($('#startDate').val()) {
-            let startDate = new Date($('#startDate').val());
 
-            for (let i = 0; i < filteredData.length; i++) {
-                if (new Date(filteredData[i].DatumUTC) < startDate) {
-                    filteredData.splice(i);
-                }
-            }
+        let startDate = $('#startDate').val();
+        let endDate = $('#endDate').val();
+
+        if (!startDate) {
+            startDate = new Date();
+            startDate.setFullYear(startDate.getFullYear() - 500);
+            let y = endDate.getFullYear();
+            let m = endDate.getMonth() + 1;
+            let d = endDate.getDay();
+            startDate = `${y}-${m}-${d}`;
+
         }
 
-        if ($('#endDate').val()) {
-            let endDate = new Date($('#endDate').val());
+        if (!endDate) {
+            endDate = new Date();
+            endDate.setFullYear(endDate.getFullYear() + 500);
 
-            for (let i = 0; i < filteredData.length; i++) {
-                if (new Date(filteredData[i].DatumUTC) > endDate) {
-                    filteredData.splice(i);
-                }
-            }
+            let y = endDate.getFullYear();
+            let m = endDate.getMonth() + 1;
+            let d = endDate.getDay();
+            endDate = `${y}-${m}-${d}`;
         }
+
+        $.ajax({
+            url: 'api/Index/FilterDatum',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(filteredData),
+            headers: {
+                'startDate' : startDate,
+                'endDate' : endDate
+            },
+            success: function (data) {
+                addDataToTable(data, tableId);
+            },
+            error: function (err) {
+                alert(JSON.stringify(err));
+            }
+        });
+
+        //if () {
+        //    let startDate = new Date($('#startDate').val());
+
+        //    for (let i = 0; i < filteredData.length; i++) {
+        //        if (new Date(filteredData[i].DatumUTC) < startDate) {
+        //            filteredData.splice(i);
+        //        }
+        //    }
+        //}
+
+        //if () {
+        //    let endDate = new Date($('#endDate').val());
+
+        //    for (let i = 0; i < filteredData.length; i++) {
+        //        if (new Date(filteredData[i].DatumUTC) > endDate) {
+        //            filteredData.splice(i);
+        //        }
+        //    }
+        //}
         
-        addDataToTable(filteredData, tableId);
+        //addDataToTable(filteredData, tableId);
     });
 
     $('#dateCancelFilter').click(function () {
         $('#endDate').val('');
         $('#startDate').val('');
-        $('.podaciZaDrzavu').remove();
         filteredData = [];
 
         addDataToTable(allData, 'tableData');
@@ -65,8 +103,6 @@ $(document).ready(function () {
 
     $('#selectDrzava').change(function () {
         if ($('#selectDrzava option:selected').attr('disabled')) return;
-
-        $('.podaciZaDrzavu').remove();
 
         $.ajax({
             url: 'api/Index/GetDataDrzava',
@@ -154,6 +190,8 @@ $(document).ready(function () {
 });
 
 function addDataToTable(data, tableId) {
+    $('.podaciZaDrzavu').remove();
+
     data.forEach(x => {
         let tr = document.createElement('tr');
         tr.className = 'podaciZaDrzavu';

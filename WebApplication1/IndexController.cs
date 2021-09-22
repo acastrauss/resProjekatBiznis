@@ -19,6 +19,23 @@ namespace WebApplication1
 {
     public class IndexController : ApiController
     {
+
+        [HttpPost]
+        [Route("api/Index/FilterDatum")]
+        public IHttpActionResult FilterDatum(object podaci)
+        {
+            IFilterDatum filterDatum = new FilterDatum();
+
+            var podaciZaFilter = JsonConvert.DeserializeObject<IEnumerable<PodaciZaPrikaz>>(podaci.ToString());
+            var pocetni = Request.Headers.GetValues("startDate").First();
+            var krajnji = Request.Headers.GetValues("endDate").First();
+
+            var dtP = DateTime.Parse(pocetni);
+            var dtK = DateTime.Parse(krajnji);
+
+            return Ok(filterDatum.FiltrirajPoDatumu(podaciZaFilter, dtP, dtK));
+        }
+
         // GET api/<controller>
         [HttpPost]
         [Route("api/Index/GetCSVFile")]
