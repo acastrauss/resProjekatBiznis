@@ -89,9 +89,13 @@ namespace WebApplication1
         }
 
         [HttpPost]
+
         [Route("api/Index/PostCSVFile")]
         public async Task<IHttpActionResult> PostCSVFile()
         {
+            var countryName = Request.Headers.GetValues("countryName").First();
+            var startDate = DateTime.Parse(Request.Headers.GetValues("startDate").First());
+            var endDate = DateTime.Parse(Request.Headers.GetValues("endDate").First());
             if (!Request.Content.IsMimeMultipartContent())
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
 
@@ -148,7 +152,8 @@ namespace WebApplication1
                 }
             }
 
-            // import logic
+            IImport import = new Import();
+            import.Load(consFile, weatherFiles, countryName, startDate, endDate);
 
             return Ok("uploaded");
         }

@@ -20,6 +20,8 @@ namespace BazaPodataka
 
                     db.Drzavas.Add(WebuBPDrzava(drzava));
                 }
+
+                db.SaveChanges();
             }
         }
 
@@ -37,6 +39,8 @@ namespace BazaPodataka
                     dbModel.Id = id;
                     db.Potrosnjas.Add(dbModel);
                 }
+
+                db.SaveChanges();
             }
         }
 
@@ -54,6 +58,8 @@ namespace BazaPodataka
                     dbModel.Id = id;
                     db.Vremes.Add(dbModel);
                 }
+
+                db.SaveChanges();
             }
         }
 
@@ -72,6 +78,8 @@ namespace BazaPodataka
 
                 db.Vremes.Where(x => x.DrzavaId == id && x.DatumUTC >= pocetniDatum && x.DatumUTC <= krajnjiDatum).ToList().ForEach(
                     x => drzava.Vremena.Add(this.BPuWebVreme(x)));
+
+                db.SaveChanges();
             }
 
             return drzava;
@@ -146,6 +154,8 @@ namespace BazaPodataka
             {
                 retVal.AddRange(db.Potrosnjas.Where(x => x.DrzavaId == id && x.DatumUTC >= pocetniDatum && x.DatumUTC <= krajnjiDatum)
                     .Select(x => BPuWebPotrosnja(x)));
+
+                db.SaveChanges();
             }
 
             return retVal;
@@ -163,6 +173,8 @@ namespace BazaPodataka
             {
                 retVal.AddRange(db.Potrosnjas.Where(x => x.DrzavaId == id)
                     .Select(x => BPuWebPotrosnja(x)));
+
+                db.SaveChanges();
             }
 
             return retVal;
@@ -194,6 +206,8 @@ namespace BazaPodataka
                     var webD = BPuWebDrzava(d);
                     retVal.Add(webD);
                 }
+
+                db.SaveChanges();
             }
 
             return retVal;
@@ -211,6 +225,8 @@ namespace BazaPodataka
             {
                 retVal.AddRange(db.Vremes.Where(x => x.DrzavaId == id && x.DatumUTC >= pocetniDatum && x.DatumUTC <= krajnjiDatum)
                     .Select(x => BPuWebVreme(x)));
+
+                db.SaveChanges();
             }
 
             return retVal;
@@ -228,6 +244,8 @@ namespace BazaPodataka
             {
                 retVal.AddRange(db.Vremes.Where(x => x.DrzavaId == id)
                     .Select(x => BPuWebVreme(x)));
+
+                db.SaveChanges();
             }
 
             return retVal;
@@ -241,6 +259,8 @@ namespace BazaPodataka
             using (var db = new Drzave())
             {
                 db.Drzavas.ToList().ForEach(x => nazivi.Add(x.Naziv));
+
+                db.SaveChanges();
             }
 
             return nazivi;

@@ -37,7 +37,7 @@ $(document).ready(function () {
             startDate.setFullYear(startDate.getFullYear() - 500);
             let y = endDate.getFullYear();
             let m = endDate.getMonth() + 1;
-            let d = endDate.getDay();
+            let d = endDate.getDate();
             startDate = `${y}-${m}-${d}`;
 
         }
@@ -48,7 +48,7 @@ $(document).ready(function () {
 
             let y = endDate.getFullYear();
             let m = endDate.getMonth() + 1;
-            let d = endDate.getDay();
+            let d = endDate.getDate();
             endDate = `${y}-${m}-${d}`;
         }
 
@@ -69,27 +69,6 @@ $(document).ready(function () {
             }
         });
 
-        //if () {
-        //    let startDate = new Date($('#startDate').val());
-
-        //    for (let i = 0; i < filteredData.length; i++) {
-        //        if (new Date(filteredData[i].DatumUTC) < startDate) {
-        //            filteredData.splice(i);
-        //        }
-        //    }
-        //}
-
-        //if () {
-        //    let endDate = new Date($('#endDate').val());
-
-        //    for (let i = 0; i < filteredData.length; i++) {
-        //        if (new Date(filteredData[i].DatumUTC) > endDate) {
-        //            filteredData.splice(i);
-        //        }
-        //    }
-        //}
-        
-        //addDataToTable(filteredData, tableId);
     });
 
     $('#dateCancelFilter').click(function () {
