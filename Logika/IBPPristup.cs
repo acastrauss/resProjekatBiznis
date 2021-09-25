@@ -13,5 +13,12 @@ namespace Logika
         IEnumerable<String> NaziviDrzava();
 
         DrzavaWeb DrzavaPoImenu(String naziv);
+
+        String PunoImeDrzave(String kratakNaziv);
+        void DodajPotrosnjuDrzave(IEnumerable<PotrsonjaWeb> potrosnje, String drzava);
+        void DodajVremenaDrzave(IEnumerable<VremeWeb> vremena, String drzava);
+        string KratakNazivDrzave(string punNaziv);
+
+
     }
 }

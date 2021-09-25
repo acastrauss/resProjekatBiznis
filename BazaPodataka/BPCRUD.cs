@@ -16,8 +16,6 @@ namespace BazaPodataka
             {
                 foreach (var drzava in drzave.ToList())
                 {
-                    // proveri dal postoji i dal je validna
-
                     db.Drzavas.Add(WebuBPDrzava(drzava));
                 }
 
@@ -33,14 +31,24 @@ namespace BazaPodataka
 
             using (var db = new Drzave())
             {
+                db.Configuration.AutoDetectChangesEnabled = false;
+                
                 foreach (var p in potrsonje)
                 {
                     var dbModel = WebuBPPotrosnja(p, id);
-                    dbModel.Id = id;
+                        
+                    if(dbModel.DatumUTC == null || dbModel.DatumUTC.Date.Equals(new DateTime(1, 1, 1).Date))
+                    {
+                        continue;
+                    }
+
+                    dbModel.DrzavaId = id;
                     db.Potrosnjas.Add(dbModel);
                 }
 
                 db.SaveChanges();
+
+                db.Configuration.AutoDetectChangesEnabled = true;
             }
         }
 
@@ -52,14 +60,17 @@ namespace BazaPodataka
 
             using (var db = new Drzave())
             {
+                db.Configuration.AutoDetectChangesEnabled = false;
+
                 foreach (var v in vremena)
                 {
                     var dbModel = WebuBPVreme(v, id);
-                    dbModel.Id = id;
+                    dbModel.DrzavaId = id;
                     db.Vremes.Add(dbModel);
                 }
 
                 db.SaveChanges();
+                db.Configuration.AutoDetectChangesEnabled = true;
             }
         }
 
@@ -89,7 +100,7 @@ namespace BazaPodataka
         {
             var drzava = new DrzavaWeb();
 
-            int id = IdZaDrzavu(imeDrzave);
+            int id = IdZaDrzavu(imeDrzave); 
             if (id == -1)
                 throw new Exception("Drzava ne postoji.");
 
@@ -281,7 +292,7 @@ namespace BazaPodataka
         {
             return new PotrsonjaWeb()
             {
-                DatumUTC = drzava.DatumUTC,
+                DatumUTC = (DateTime)drzava.DatumUTC,
                 Kolicina = drzava.Kolicina
             };
         }
@@ -292,7 +303,7 @@ namespace BazaPodataka
             {
                 AtmosferskiPritisak = drzava.AtmosferskiPritisak,
                 BrzinaVetra = drzava.BrzinaVetra,
-                DatumUTC = drzava.DatumUTC,
+                DatumUTC = (DateTime)drzava.DatumUTC,
                 Temperatura = drzava.Temperatura,
                 VlaznostVazduha = drzava.VlaznostVazduha
             };

@@ -12,6 +12,12 @@ namespace Logika
     {
         public string SaveData(IEnumerable<PodaciZaPrikaz> podaci)
         {
+            if (podaci == null)
+                throw new Exception("Lista ne moze biti prazna niti null");
+
+            if (podaci.Count() == 0)
+                throw new Exception("Lista ne moze biti prazna niti null");
+
             var putanja = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
             var arr = putanja.Split('\\').ToList();
             arr.Remove(arr.Last());
@@ -21,8 +27,8 @@ namespace Logika
             string putanjaPuna = System.IO.Path.Combine(p, "CSVFiles", a);
             //putanjaPuna = putanjaPuna.Substring(6, putanjaPuna.Length - 6);
             
-            using (var csvWrite = File.CreateText(putanjaPuna))
-            {
+            //using (var csvWrite = File.OpenText(putanjaPuna))
+            //{
                 foreach (var red in podaci)
                 {
                     string vrsta = "";
@@ -62,11 +68,13 @@ namespace Logika
                         string BrzinaVetra = red.BrzinaVetra.ToString();
                         vrsta += BrzinaVetra + ",";
                     }
+                    
+                    vrsta += "\n";
+                    File.AppendAllText(putanjaPuna, vrsta);
 
-                    csvWrite.WriteLine(vrsta);
                     vrsta = "";
                 }
-            }
+            //}
 
             return putanjaPuna;
 

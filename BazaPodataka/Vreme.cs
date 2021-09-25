@@ -20,7 +20,7 @@ namespace BazaPodataka
         public int VlaznostVazduha { get; set; }
 
         public int BrzinaVetra { get; set; }
-
+        
         public DateTime DatumUTC { get; set; }
 
         public virtual Drzava Drzava { get; set; }

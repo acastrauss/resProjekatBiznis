@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+
     $('#importBtn').click(function () {
         let consFile = document.getElementById('importConsFile').files[0];
         
@@ -37,7 +38,6 @@
             contentType: false,
             success: function (data) {
                 alert('File uploaded');
-                alert(data);
             },
             error: function (data) {
                 alert(JSON.stringify(data));

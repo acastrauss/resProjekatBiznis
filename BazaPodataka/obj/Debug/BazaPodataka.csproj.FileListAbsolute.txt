@@ -15,3 +15,11 @@ D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\obj\Debug\BazaPodataka.cspro
 D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\obj\Debug\BazaPodataka.csproj.CopyComplete
 D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\obj\Debug\BazaPodataka.dll
 D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\obj\Debug\BazaPodataka.pdb
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\EntityFramework.Extended.dll
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\EntityFrameworkExtensions.dll
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\StructureMap.dll
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\EntityFramework.Extended.pdb
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\EntityFramework.Extended.xml
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\EntityFramework.Extended.dll.config
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\EntityFrameworkExtensions.xml
+D:\res_Projekat_Biznis\WebApplication1\BazaPodataka\bin\Debug\StructureMap.xml

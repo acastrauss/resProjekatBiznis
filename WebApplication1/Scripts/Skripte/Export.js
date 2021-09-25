@@ -73,7 +73,8 @@
                 var link = document.createElement('a');
                 link.href = window.URL.createObjectURL(blob);
                 link.download = new String(new Date()) + '.csv';
-                link.click();},
+                link.click();
+            },
             error: function (error) {
                 alert(JSON.stringify(error));
             }

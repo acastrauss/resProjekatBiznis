@@ -25,7 +25,7 @@ namespace WebApplication1
         public IHttpActionResult FilterDatum(object podaci)
         {
             IFilterDatum filterDatum = new FilterDatum();
-
+            
             var podaciZaFilter = JsonConvert.DeserializeObject<IEnumerable<PodaciZaPrikaz>>(podaci.ToString());
             var pocetni = Request.Headers.GetValues("startDate").First();
             var krajnji = Request.Headers.GetValues("endDate").First();
@@ -112,9 +112,20 @@ namespace WebApplication1
 
                 if(fHeader != null)
                 {
+                    
                     if (fHeader.Contains(".xls"))
                     {
-                        name += ".xls";
+                        fHeader = fHeader.Substring(1);
+                        fHeader = fHeader.Substring(0, fHeader.Length - 1);
+
+                        if (fHeader.EndsWith(".xlsx"))
+                        {
+                            name += ".xlsx";
+                        }
+                        else
+                        {
+                            name += ".xls";
+                        }
                     }
                     else
                     {
@@ -151,6 +162,7 @@ namespace WebApplication1
                     consFile = pathFile;
                 }
             }
+
 
             IImport import = new Import();
             import.Load(consFile, weatherFiles, countryName, startDate, endDate);

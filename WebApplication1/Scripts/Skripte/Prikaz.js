@@ -23,6 +23,8 @@ $(document).ready(function () {
         }
     });
 
+
+
     $('.dateFilter').change(function () {
         
         if (allData.length == 0) return;
@@ -51,7 +53,7 @@ $(document).ready(function () {
             let d = endDate.getDate();
             endDate = `${y}-${m}-${d}`;
         }
-
+        
         $.ajax({
             url: 'api/Index/FilterDatum',
             type: 'POST',

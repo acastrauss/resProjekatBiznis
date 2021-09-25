@@ -18,3 +18,9 @@ D:\res_Projekat_Biznis\WebApplication1\Logika\bin\Debug\EntityFramework.SqlServe
 D:\res_Projekat_Biznis\WebApplication1\Logika\bin\Debug\BazaPodataka.dll
 D:\res_Projekat_Biznis\WebApplication1\Logika\bin\Debug\BazaPodataka.pdb
 D:\res_Projekat_Biznis\WebApplication1\Logika\bin\Debug\BazaPodataka.dll.config
+D:\res_Projekat_Biznis\WebApplication1\Logika\bin\Debug\ExcelDataReader.DataSet.dll
+D:\res_Projekat_Biznis\WebApplication1\Logika\bin\Debug\ExcelDataReader.dll
+D:\res_Projekat_Biznis\WebApplication1\Logika\bin\Debug\ExcelDataReader.pdb
+D:\res_Projekat_Biznis\WebApplication1\Logika\bin\Debug\ExcelDataReader.xml
+D:\res_Projekat_Biznis\WebApplication1\Logika\bin\Debug\ExcelDataReader.DataSet.pdb
+D:\res_Projekat_Biznis\WebApplication1\Logika\bin\Debug\ExcelDataReader.DataSet.xml

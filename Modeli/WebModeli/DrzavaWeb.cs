@@ -8,9 +8,9 @@ namespace Modeli.WebModeli
 {
     public class DrzavaWeb
     {
-        public List<VremeWeb> Vremena;
+        public List<VremeWeb> Vremena; 
         public List<PotrsonjaWeb> Potrosnje;
-        public String Naziv;
-        public String KratakNaziv;
+        public String Naziv; 
+        public String KratakNaziv; 
     }
 }

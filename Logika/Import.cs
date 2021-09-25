@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using BazaPodataka;
 using Modeli.WebModeli;
 using Microsoft.VisualBasic.FileIO;
+using ExcelDataReader;
+using System.IO;
+using System.Data;
 
 namespace Logika
 {
@@ -20,8 +23,6 @@ namespace Logika
             {
                 LoadVreme(s, drzava, DatumPocetka, DatumKraja);
             }
-
-
         }
 
         public void LoadPotrosnja(string fajl, string drzava, DateTime DatumPocetka, DateTime DatumKraja)
@@ -29,38 +30,94 @@ namespace Logika
             if (String.IsNullOrEmpty(fajl))
                 return;
 
-            BPCRUD bpcrud = new BPCRUD();
+            IBPPristup bpcrud = new BPPristup();
+
             using(TextFieldParser csvParser = new TextFieldParser(fajl))
             {
                 String stateName = String.Empty;
-                csvParser.CommentTokens = new string[] { "#" };
-                csvParser.SetDelimiters(new string[] { "," });
-                csvParser.HasFieldsEnclosedInQuotes = true;
-                csvParser.ReadLine();
                 List<PotrsonjaWeb> potrosnje = new List<PotrsonjaWeb>();
-                while (!csvParser.EndOfData)
-                {
-                    PotrsonjaWeb potrosnja = new PotrsonjaWeb();
-                    double vrednost;
-                    string[] fields = csvParser.ReadFields();
 
-                    string kod = fields[5];
-                    string punNaziv = bpcrud.PunoImeDrzave(kod);
-                    if (punNaziv != drzava)
-                        continue;
-                    potrosnja.DatumUTC  = DateTime.ParseExact(fields[2], "M/d/yyyy", null);
-                    if (potrosnja.DatumUTC < DatumPocetka || potrosnja.DatumUTC >= DatumKraja)
-                        continue;
-                    potrosnja.Kolicina = double.TryParse(fields[7], out vrednost) ? vrednost : 0;
-                    potrosnje.Add(potrosnja);
+                using (var stream = File.Open(fajl, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    using (var reader = fajl.EndsWith(".xls") ? 
+                        ExcelReaderFactory.CreateReader(stream) :
+                        ExcelReaderFactory.CreateOpenXmlReader(stream)
+                        )
+                    {
+                        reader.Read();
+
+                        int it = 0;
+                        var kratakNaziv = bpcrud.KratakNazivDrzave(drzava);
+
+                        if(reader != null)
+                        {
+                            DataSet content = reader.AsDataSet();
+
+                            foreach (DataTable tbl in content.Tables)
+                            {
+                                foreach (DataRow r in tbl.Rows)
+                                {
+                                    if (it++ == 0) continue;
+
+                                    var itc = 0;
+                                    var potr = new PotrsonjaWeb();
+                                    bool add = true;
+
+                                    foreach (DataColumn c in tbl.Columns)
+                                    {
+                                        try
+                                        {
+                                            if (itc == 1)
+                                            {
+                                                potr.DatumUTC = DateTime.Parse(r[c].ToString());
+                                                if (potr.DatumUTC < DatumPocetka || potr.DatumUTC > DatumKraja)
+                                                {
+                                                    add = false;
+                                                    break;
+                                                }
+                                            }
+                                            else if (itc == 5)
+                                            {
+                                                var code = (string)r[c];
+                                                if (!code.Equals(kratakNaziv))
+                                                {
+                                                    add = false;
+                                                    break;
+                                                }
+                                            }
+                                            else if (itc == 7)
+                                            {
+                                                potr.Kolicina = float.Parse(r[c].ToString());
+                                            }
+
+                                            itc++;
+
+                                        }
+                                        catch (Exception)
+                                        {
+                                            continue;
+                                        }
+                                    }
+
+                                    if(add)
+                                        potrosnje.Add(potr);
+                                }
+                            }
+                       }
+
+                        reader.Close();
+
+                    }
                 }
+
                 bpcrud.DodajPotrosnjuDrzave(potrosnje, drzava);
             }
         }
 
         public void LoadVreme(string fajl, string drzava, DateTime DatumPocetka, DateTime DatumKraja)
         {
-            BPCRUD bpcrud = new BPCRUD();
+            IBPPristup bpcrud = new BPPristup();
+
             using (TextFieldParser csvParser = new TextFieldParser(fajl))
             {
                 csvParser.SetDelimiters(new string[] { ";" });
@@ -71,7 +128,7 @@ namespace Logika
                 while (!csvParser.EndOfData)
                 {
                     double pritisak;
-                    int temperatura;
+                    double temperatura;
                     int vlaznost;
                     int brzinaVetra;
                     VremeWeb vreme = new VremeWeb();
@@ -91,13 +148,13 @@ namespace Logika
                         vreme.DatumUTC = DateTime.ParseExact(fields[0], "dd.MM.yyyy HH:mm", null);
                     if(vreme.DatumUTC <= DatumPocetka || vreme.DatumUTC >= DatumKraja)
                         continue;
-                    vreme.Temperatura = int.TryParse(fields[1], out temperatura) ? temperatura : 0;
+                    vreme.Temperatura = double.TryParse(fields[1], out temperatura) ? (int)temperatura : 0;
                     vreme.AtmosferskiPritisak = double.TryParse(fields[2], out pritisak) ? pritisak : 0;
                     vreme.VlaznostVazduha = int.TryParse(fields[4], out vlaznost) ? vlaznost : 0;
                     vreme.BrzinaVetra = int.TryParse(fields[6], out brzinaVetra) ? brzinaVetra : 0;
                     vremena.Add(vreme);
                 }
-                bpcrud.DodajVremeDrzave(vremena, drzava);
+                bpcrud.DodajVremenaDrzave(vremena, drzava);
             }
         }
     }

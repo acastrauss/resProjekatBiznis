@@ -215,3 +215,6 @@ D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\BazaPodataka.dll.conf
 D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\ExcelDataReader.dll
 D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\ExcelDataReader.pdb
 D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\ExcelDataReader.xml
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\ExcelDataReader.DataSet.dll
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\ExcelDataReader.DataSet.pdb
+D:\res_Projekat_Biznis\WebApplication1\WebApplication1\bin\ExcelDataReader.DataSet.xml
