@@ -19,6 +19,13 @@ namespace WebApplication1
 {
     public class IndexController : ApiController
     {
+        [HttpPost]
+        [Route("api/Index/DodajDrzavu")]
+        public IHttpActionResult DodajDrzavu([FromBody]string naziv)
+        {
+
+        }
+
 
         [HttpPost]
         [Route("api/Index/FilterDatum")]

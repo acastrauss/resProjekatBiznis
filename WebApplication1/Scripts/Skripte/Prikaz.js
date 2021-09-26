@@ -23,7 +23,11 @@ $(document).ready(function () {
         }
     });
 
+    $('#dodajDrzavuBtn').click(function () {
+        $.ajax({
 
+        });
+    });
 
     $('.dateFilter').change(function () {
         

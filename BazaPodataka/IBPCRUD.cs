@@ -10,6 +10,7 @@ namespace BazaPodataka
 {
     public interface IBPCRUD
     {
+        void DodajDrzavu(String naziv, String kratakNaziv);
         int IdZaDrzavu(string ime);
         void DodajVremeDrzave(IEnumerable<VremeWeb> vremena, String imeDrzave);
         void DodajPotrosnjuDrzave(IEnumerable<PotrsonjaWeb> potrsonje, String imeDrzave);

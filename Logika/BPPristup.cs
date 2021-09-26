@@ -121,5 +121,20 @@ namespace Logika
 
             return bp.SveDrzave();
         }
+
+        public void DodajDrzavu(string naziv, string kratakNaziv)
+        {
+            IBPCRUD bp = new BPCRUD();
+            ILogPisanje logPisanje = new LogPisanje();
+            logPisanje.AddLog(new LogPodatak()
+            {
+                LogTime = DateTime.Now,
+                Message = String.Format("Dodata drzava:{0}", naziv
+                    ),
+                Type = LOG_TYPE.INFO
+            });
+
+            bp.DodajDrzavu(naziv, kratakNaziv);
+        }
     }
 }

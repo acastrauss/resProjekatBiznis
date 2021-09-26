@@ -9,6 +9,27 @@ namespace BazaPodataka
 {
     public class BPCRUD : IBPCRUD
     {
+
+        public void DodajDrzavu(string naziv, string kratakNaziv)
+        {
+            int id = IdZaDrzavu(naziv);
+            if (id == -1)
+                throw new Exception("Drzava vec postoji.");
+
+            using (var db = new Drzave())
+            {
+                db.Drzavas.Add(new Drzava()
+                {
+                    KratakNaziv = kratakNaziv,
+                    Naziv = naziv,
+                    Potrosnjas = new List<Potrosnja>(),
+                    Vremes = new List<Vreme>()
+                });
+
+                db.SaveChanges();
+            }
+        }
+
         public void DodajPotrosnjuDrzave(IEnumerable<PotrsonjaWeb> potrsonje, string imeDrzave)
         {
             int id = IdZaDrzavu(imeDrzave);
@@ -223,5 +244,6 @@ namespace BazaPodataka
                 Temperatura = drzava.Temperatura
             };
         }
+
     }
 }

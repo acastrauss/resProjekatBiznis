@@ -9,6 +9,7 @@ namespace Logika
 {
     public interface IBPPristup
     {
+        void DodajDrzavu(String naziv, String kratakNaziv);
         IEnumerable<DrzavaWeb> SveDrzave();
         IEnumerable<String> NaziviDrzava();
 
