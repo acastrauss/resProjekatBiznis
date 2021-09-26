@@ -21,18 +21,6 @@ namespace WebApplication1
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            #region LogData
-            
-            LogPodatak logPodatak = new LogPodatak()
-            {
-                LogTime = DateTime.Now,
-                Message = "Aplikacija je pocela sa radom.",
-                Type = LOG_TYPE.INFO
-            };
-
-            LogPisanje.AddLog(logPodatak);
-
-            #endregion
         }
     }
 }

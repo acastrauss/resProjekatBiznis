@@ -13,6 +13,5 @@ namespace Logika
     public interface IKonverzija
     {
         IEnumerable<PodaciZaPrikaz> ModeliZaPrikaz(IEnumerable<DrzavaWeb> drzave);
-        IEnumerable<DrzavaWeb> ModeliZaWeb(IEnumerable<PodaciZaPrikaz> podaci);
     }
 }

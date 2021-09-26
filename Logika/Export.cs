@@ -18,13 +18,13 @@ namespace Logika
             if (podaci.Count() == 0)
                 throw new Exception("Lista ne moze biti prazna niti null");
 
-            var putanja = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            var putanja = Directory.GetCurrentDirectory();//System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
             var arr = putanja.Split('\\').ToList();
             arr.Remove(arr.Last());
             arr.Remove(arr.First());
             var p = String.Join("\\", arr);
             string a = "Output_" + DateTime.Now.ToString("yyy_MM_d_HH_mm") + ".csv";
-            string putanjaPuna = System.IO.Path.Combine(p, "CSVFiles", a);
+            string putanjaPuna = System.IO.Path.Combine(putanja, "WebApplication1\\CSVFiles", a);
             //putanjaPuna = putanjaPuna.Substring(6, putanjaPuna.Length - 6);
             
             //using (var csvWrite = File.OpenText(putanjaPuna))

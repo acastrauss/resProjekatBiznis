@@ -9,20 +9,6 @@ namespace BazaPodataka
 {
     public class BPCRUD : IBPCRUD
     {
-
-        public void DodajDrzave(IEnumerable<DrzavaWeb> drzave)
-        {
-            using (var db = new Drzave())
-            {
-                foreach (var drzava in drzave.ToList())
-                {
-                    db.Drzavas.Add(WebuBPDrzava(drzava));
-                }
-
-                db.SaveChanges();
-            }
-        }
-
         public void DodajPotrosnjuDrzave(IEnumerable<PotrsonjaWeb> potrsonje, string imeDrzave)
         {
             int id = IdZaDrzavu(imeDrzave);
@@ -74,28 +60,6 @@ namespace BazaPodataka
             }
         }
 
-        public DrzavaWeb DrzavaPoDatumu(DateTime pocetniDatum, DateTime krajnjiDatum, string imeDrzave)
-        {
-            var drzava = new DrzavaWeb();
-
-            int id = IdZaDrzavu(imeDrzave);
-            if (id == -1)
-                throw new Exception("Drzava ne postoji.");
-
-            using (var db = new Drzave())
-            {
-                db.Potrosnjas.Where(x => x.DrzavaId == id && x.DatumUTC >= pocetniDatum && x.DatumUTC <= krajnjiDatum).ToList().ForEach(
-                    x => drzava.Potrosnje.Add(this.BPuWebPotrosnja(x)));
-
-                db.Vremes.Where(x => x.DrzavaId == id && x.DatumUTC >= pocetniDatum && x.DatumUTC <= krajnjiDatum).ToList().ForEach(
-                    x => drzava.Vremena.Add(this.BPuWebVreme(x)));
-
-                db.SaveChanges();
-            }
-
-            return drzava;
-        }
-
         public DrzavaWeb DrzavaPoImenu(string imeDrzave)
         {
             var drzava = new DrzavaWeb();
@@ -110,15 +74,6 @@ namespace BazaPodataka
             }
 
             return drzava;
-        }
-
-        public bool DrzavaPostoji(string name)
-        {
-            var drzava = new DrzavaWeb();
-
-            int id = IdZaDrzavu(name);
-
-            return id != -1;
         }
 
         public int IdZaDrzavu(string ime)
@@ -149,44 +104,6 @@ namespace BazaPodataka
 
             if (String.IsNullOrEmpty(retVal))
                 throw new Exception("Nema kratkog naziva drzave.");
-
-            return retVal;
-        }
-
-        public IEnumerable<PotrsonjaWeb> PotrosnjaPoDatumu(DateTime pocetniDatum, DateTime krajnjiDatum, string imeDrzave)
-        {
-            var retVal = new List<PotrsonjaWeb>();
-
-            int id = IdZaDrzavu(imeDrzave);
-            if (id == -1)
-                throw new Exception("Drzava ne postoji.");
-
-            using (var db = new Drzave())
-            {
-                retVal.AddRange(db.Potrosnjas.Where(x => x.DrzavaId == id && x.DatumUTC >= pocetniDatum && x.DatumUTC <= krajnjiDatum)
-                    .Select(x => BPuWebPotrosnja(x)));
-
-                db.SaveChanges();
-            }
-
-            return retVal;
-        }
-
-        public IEnumerable<PotrsonjaWeb> PotrosnjaPoImenu(string imeDrzave)
-        {
-            var retVal = new List<PotrsonjaWeb>();
-
-            int id = IdZaDrzavu(imeDrzave);
-            if (id == -1)
-                throw new Exception("Drzava ne postoji.");
-
-            using (var db = new Drzave())
-            {
-                retVal.AddRange(db.Potrosnjas.Where(x => x.DrzavaId == id)
-                    .Select(x => BPuWebPotrosnja(x)));
-
-                db.SaveChanges();
-            }
 
             return retVal;
         }
@@ -223,45 +140,6 @@ namespace BazaPodataka
 
             return retVal;
         }
-
-        public IEnumerable<VremeWeb> VremePoDatumu(DateTime pocetniDatum, DateTime krajnjiDatum, string imeDrzave)
-        {
-            var retVal = new List<VremeWeb>();
-
-            int id = IdZaDrzavu(imeDrzave);
-            if (id == -1)
-                throw new Exception("Drzava ne postoji.");
-
-            using (var db = new Drzave())
-            {
-                retVal.AddRange(db.Vremes.Where(x => x.DrzavaId == id && x.DatumUTC >= pocetniDatum && x.DatumUTC <= krajnjiDatum)
-                    .Select(x => BPuWebVreme(x)));
-
-                db.SaveChanges();
-            }
-
-            return retVal;
-        }
-
-        public IEnumerable<VremeWeb> VremePoImenu(string imeDrzave)
-        {
-            var retVal = new List<VremeWeb>();
-
-            int id = IdZaDrzavu(imeDrzave);
-            if (id == -1)
-                throw new Exception("Drzava ne postoji.");
-
-            using (var db = new Drzave())
-            {
-                retVal.AddRange(db.Vremes.Where(x => x.DrzavaId == id)
-                    .Select(x => BPuWebVreme(x)));
-
-                db.SaveChanges();
-            }
-
-            return retVal;
-        }
-
 
         public IEnumerable<string> NaziviDrzava()
         {

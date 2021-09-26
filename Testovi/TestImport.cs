@@ -106,6 +106,53 @@ namespace Testovi
             }
         }
 
+        [Test]
+        public void PotrosnjaTestOk()
+        {
+            string putanjaPotrosnja = Path.GetDirectoryName(Path.GetDirectoryName(TestContext.CurrentContext.TestDirectory)) + "\\Test\\PotrosnjaTest.xlsx";
+            try
+            {
+                import.LoadPotrosnja(putanjaPotrosnja, "Serbia", DateTime.Parse("05/05/2011"), DateTime.Parse("05/05/2021"));
+                Assert.IsTrue(true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
+
+        }
+        [Test]
+        public void VremeTestOk()
+        {
+            string putanjaVreme = Path.GetDirectoryName(Path.GetDirectoryName(TestContext.CurrentContext.TestDirectory)) + "\\Test\\VremeTest.csv";
+            try
+            {
+                import.LoadVreme(putanjaVreme, "Serbia", DateTime.Parse("05/05/2011"), DateTime.Parse("05/05/2021"));
+                Assert.IsTrue(true);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [Test]
+        public void AllTestOk()
+        {
+            string putanjaVreme = Path.GetDirectoryName(Path.GetDirectoryName(TestContext.CurrentContext.TestDirectory)) + "\\Test\\VremeTest.csv";
+            string putanjaPotrosnja = Path.GetDirectoryName(Path.GetDirectoryName(TestContext.CurrentContext.TestDirectory)) + "\\Test\\PotrosnjaTest.xlsx";
+            List<string> lista = new List<string>();
+            lista.Add(putanjaVreme);
+            try
+            {
+                import.Load(putanjaPotrosnja, lista, "Serbia", DateTime.Parse("05/05/2011"), DateTime.Parse("05/05/2021"));
+                Assert.IsTrue(true);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+        }
 
     }
 }

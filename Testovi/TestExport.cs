@@ -78,18 +78,11 @@ namespace Testovi
         [Test]
         public void TestEksportRegularan()
         {
-            string[] kolone = new string[] { "Drzava", "UTC vreme", "Potrosnja", "Temperatura", "Pritisak", "Vlaznost", "Brzina vetra" };
             string putanja = eksport.SaveData(lista);
             Assert.IsTrue(File.Exists(putanja));
             this.SetUp();
         }
 
-
-        [Test]
-        public void nista()
-        {
-            Assert.IsTrue(1 == 1);
-        }
 
         [TearDown]
         public void TearDown()

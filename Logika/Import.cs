@@ -28,87 +28,89 @@ namespace Logika
         public void LoadPotrosnja(string fajl, string drzava, DateTime DatumPocetka, DateTime DatumKraja)
         {
             if (String.IsNullOrEmpty(fajl))
-                return;
+                throw new Exception("Fajl ne sme biti null");
+
+            if (String.IsNullOrEmpty(drzava))
+                throw new Exception("Drzava ne sme biti null");
 
             IBPPristup bpcrud = new BPPristup();
+                
+            String stateName = String.Empty;
+            List<PotrsonjaWeb> potrosnje = new List<PotrsonjaWeb>();
 
-            using(TextFieldParser csvParser = new TextFieldParser(fajl))
+            using (var stream = File.Open(fajl, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                String stateName = String.Empty;
-                List<PotrsonjaWeb> potrosnje = new List<PotrsonjaWeb>();
-
-                using (var stream = File.Open(fajl, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (var reader = fajl.EndsWith(".xls") ? 
+                    ExcelReaderFactory.CreateReader(stream) :
+                    ExcelReaderFactory.CreateOpenXmlReader(stream)
+                    )
                 {
-                    using (var reader = fajl.EndsWith(".xls") ? 
-                        ExcelReaderFactory.CreateReader(stream) :
-                        ExcelReaderFactory.CreateOpenXmlReader(stream)
-                        )
+                        
+                    int it = 0;
+                    var kratakNaziv = bpcrud.KratakNazivDrzave(drzava);
+
+                    if(reader != null)
                     {
-                        reader.Read();
+                        DataSet content = reader.AsDataSet();
 
-                        int it = 0;
-                        var kratakNaziv = bpcrud.KratakNazivDrzave(drzava);
-
-                        if(reader != null)
+                        foreach (DataTable tbl in content.Tables)
                         {
-                            DataSet content = reader.AsDataSet();
-
-                            foreach (DataTable tbl in content.Tables)
+                            foreach (DataRow r in tbl.Rows)
                             {
-                                foreach (DataRow r in tbl.Rows)
+                                if (it++ == 0) continue;
+
+                                var itc = 0;
+                                var potr = new PotrsonjaWeb();
+                                bool add = true;
+
+                                foreach (DataColumn c in tbl.Columns)
                                 {
-                                    if (it++ == 0) continue;
-
-                                    var itc = 0;
-                                    var potr = new PotrsonjaWeb();
-                                    bool add = true;
-
-                                    foreach (DataColumn c in tbl.Columns)
+                                    try
                                     {
-                                        try
+                                        if (itc == 1)
                                         {
-                                            if (itc == 1)
+                                            potr.DatumUTC = DateTime.Parse(r[c].ToString());
+                                            if (potr.DatumUTC < DatumPocetka || potr.DatumUTC > DatumKraja)
                                             {
-                                                potr.DatumUTC = DateTime.Parse(r[c].ToString());
-                                                if (potr.DatumUTC < DatumPocetka || potr.DatumUTC > DatumKraja)
-                                                {
-                                                    add = false;
-                                                    break;
-                                                }
+                                                add = false;
+                                                break;
                                             }
-                                            else if (itc == 5)
-                                            {
-                                                var code = (string)r[c];
-                                                if (!code.Equals(kratakNaziv))
-                                                {
-                                                    add = false;
-                                                    break;
-                                                }
-                                            }
-                                            else if (itc == 7)
-                                            {
-                                                potr.Kolicina = float.Parse(r[c].ToString());
-                                            }
-
-                                            itc++;
-
                                         }
-                                        catch (Exception)
+                                        else if (itc == 5)
                                         {
-                                            continue;
+                                            var code = (string)r[c];
+                                            if (!code.Equals(kratakNaziv))
+                                            {
+                                                add = false;
+                                                break;
+                                            }
                                         }
+                                        else if (itc == 7)
+                                        {
+                                            potr.Kolicina = float.Parse(r[c].ToString());
+                                        }
+
+                                        itc++;
+
                                     }
-
-                                    if(add)
-                                        potrosnje.Add(potr);
+                                    catch (Exception)
+                                    {
+                                        continue;
+                                    }
                                 }
+
+                                if(add)
+                                    potrosnje.Add(potr);
                             }
-                       }
-
-                        reader.Close();
-
+                        }
                     }
-                }
+
+                    reader.Close();
+
+                }    
+
+                if (potrosnje.Count == 0)
+                    throw new Exception("Funkcija nije odradila posao");
 
                 bpcrud.DodajPotrosnjuDrzave(potrosnje, drzava);
             }
@@ -116,6 +118,12 @@ namespace Logika
 
         public void LoadVreme(string fajl, string drzava, DateTime DatumPocetka, DateTime DatumKraja)
         {
+            if (String.IsNullOrEmpty(fajl))
+                throw new Exception("Fajl ne sme biti null");
+
+            if (String.IsNullOrEmpty(drzava))
+                throw new Exception("Drzava ne sme biti null");
+
             IBPPristup bpcrud = new BPPristup();
 
             using (TextFieldParser csvParser = new TextFieldParser(fajl))
@@ -154,6 +162,10 @@ namespace Logika
                     vreme.BrzinaVetra = int.TryParse(fields[6], out brzinaVetra) ? brzinaVetra : 0;
                     vremena.Add(vreme);
                 }
+
+                if (vremena.Count == 0)
+                    throw new Exception("Funkcija nije odradila posao");
+
                 bpcrud.DodajVremenaDrzave(vremena, drzava);
             }
         }

@@ -16,23 +16,61 @@ namespace Logika
             IBPCRUD bp = new BPCRUD();
 
             bp.DodajPotrosnjuDrzave(potrosnje, drzava);
+
+            ILogPisanje logPisanje = new LogPisanje();
+            logPisanje.AddLog(new LogPodatak()
+            {
+                LogTime = DateTime.Now,
+                Message = String.Format("Dodato {0} entiteta podataka o potrosnji za drzavu:{1}",
+                    potrosnje.Count(), drzava),
+                Type = LOG_TYPE.INFO
+            });
         }
 
         public void DodajVremenaDrzave(IEnumerable<VremeWeb> vremena, string drzava)
         {
             IBPCRUD bp = new BPCRUD();
             bp.DodajVremeDrzave(vremena, drzava);
+
+            ILogPisanje logPisanje = new LogPisanje();
+            logPisanje.AddLog(new LogPodatak()
+            {
+                LogTime = DateTime.Now,
+                Message = String.Format("Dodato {0} entiteta podataka o vremenu za drzavu:{1}",
+                    vremena.Count(), drzava),
+                Type = LOG_TYPE.INFO
+            });
         }
 
         public string PunoImeDrzave(string kratakNaziv)
         {
             IBPCRUD bp = new BPCRUD();
+
+            ILogPisanje logPisanje = new LogPisanje();
+            logPisanje.AddLog(new LogPodatak()
+            {
+                LogTime = DateTime.Now,
+                Message = String.Format("Zatrazeno puno ime drzave za kratak naziv:{0}", kratakNaziv
+                    ),
+                Type = LOG_TYPE.INFO
+            });
+
             return bp.PunoImeDrzave(kratakNaziv);
         }
 
         public string KratakNazivDrzave(string punNaziv)
         {
             IBPCRUD bp = new BPCRUD();
+
+            ILogPisanje logPisanje = new LogPisanje();
+            logPisanje.AddLog(new LogPodatak()
+            {
+                LogTime = DateTime.Now,
+                Message = String.Format("Zatrazeno kratko ime drzave za pun naziv:{0}", punNaziv
+                    ),
+                Type = LOG_TYPE.INFO
+            });
+
             return bp.KratkoImeDrzave(punNaziv);
         }
 
@@ -40,8 +78,14 @@ namespace Logika
         {
             IBPCRUD bp = new BPCRUD();
 
-            LogPisanje.AddLog(new LogPodatak(
-                LOG_TYPE.INFO, String.Format("Zatrazeni podaci iz baze o drzavi sa nazivom: {0}.", naziv), DateTime.Now));
+            ILogPisanje logPisanje = new LogPisanje();
+            logPisanje.AddLog(new LogPodatak()
+            {
+                LogTime = DateTime.Now,
+                Message = String.Format("Zatrazeni podaci za drzavu: {0}", naziv
+                    ),
+                Type = LOG_TYPE.INFO
+            });
 
             return bp.DrzavaPoImenu(naziv);
         }
@@ -50,8 +94,14 @@ namespace Logika
         {
             IBPCRUD bp = new BPCRUD();
 
-            LogPisanje.AddLog(new LogPodatak(
-                LOG_TYPE.INFO, String.Format("Zatrazeni svi nazivi drzava iz baze."), DateTime.Now));
+            ILogPisanje logPisanje = new LogPisanje();
+            logPisanje.AddLog(new LogPodatak()
+            {
+                LogTime = DateTime.Now,
+                Message = String.Format("Zatrazeni svi nazivi drzava."
+                    ),
+                Type = LOG_TYPE.INFO
+            });
 
             return bp.NaziviDrzava();
         }
@@ -60,8 +110,14 @@ namespace Logika
         {
             IBPCRUD bp = new BPCRUD();
 
-            LogPisanje.AddLog(new LogPodatak(
-                LOG_TYPE.INFO, String.Format("Zatrazeni svi podaci drzava iz baze."), DateTime.Now));
+            ILogPisanje logPisanje = new LogPisanje();
+            logPisanje.AddLog(new LogPodatak()
+            {
+                LogTime = DateTime.Now,
+                Message = String.Format("Zatrazeni svi podaci za drzave."
+                    ),
+                Type = LOG_TYPE.INFO
+            });
 
             return bp.SveDrzave();
         }

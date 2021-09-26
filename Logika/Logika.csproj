@@ -75,6 +75,7 @@
     <Compile Include="IFilterKolone.cs" />
     <Compile Include="IImport.cs" />
     <Compile Include="IKonverzija.cs" />
+    <Compile Include="ILogPisanje.cs" />
     <Compile Include="Import.cs" />
     <Compile Include="Konverzija.cs" />
     <Compile Include="LogPisanje.cs" />

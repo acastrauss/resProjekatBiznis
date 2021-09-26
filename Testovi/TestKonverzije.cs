@@ -101,20 +101,23 @@ namespace Testovi
         {
 
             IEnumerable<PodaciZaPrikaz> podaci = konverzija.ModeliZaPrikaz(drzave);
-            bool provera = false;
+            bool provera = true;
             podaci.ToList();
             foreach (PodaciZaPrikaz data in podaci)
             {
-                if ((data.NazivDrzave == "Serbia") &&
-                    (data.KolicinaEnergije == 22.22) &&
+                if (!(
+                    (data.NazivDrzave == "Serbia") &&
+                    (data.KolicinaEnergije == 22.22 || data.KolicinaEnergije == null) &&
                     (DateTime.Compare((DateTime)data.DatumUTC, new DateTime(2016, 5, 5)) == 0) &&
-                    (data.Temperatura == 22) &&
-                    (data.BrzinaVetra == 22) &&
-                    (data.Pritisak == 22) &&
-                    (data.VlaznostVazduha == 22)
+                    (data.Temperatura == 10 || data.Temperatura == null) &&
+                    (data.BrzinaVetra == 11 || data.BrzinaVetra == null) &&
+                    (data.Pritisak == 33.33 || data.Pritisak == null) &&
+                    (data.VlaznostVazduha == 11 || data.VlaznostVazduha == null)
+                    )
                     )
                 {
-                    provera = true;
+                    provera = false;
+                    break;
                 }
             }
             Assert.IsTrue(provera);

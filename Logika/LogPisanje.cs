@@ -9,12 +9,17 @@ using System.Web;
 
 namespace Logika
 {
-    public class LogPisanje
+    public class LogPisanje : ILogPisanje
     {
-        private static String LogFilePath = HttpContext.Current.Server.MapPath("~/LogFile/Log.csv");
+        private static String LogFilePath = Path.Combine(
+            Directory.GetCurrentDirectory(), "WebApplication1\\LogFile\\Log.csv"
+            );
 
-        public static void AddLog(LogPodatak logPodatak)
+        public void AddLog(LogPodatak logPodatak)
         {
+            if (logPodatak == null)
+                throw new Exception("Log podatak ne moze biti null");
+
             if (!File.Exists(LogFilePath))
             {
                 File.AppendAllText(LogFilePath, String.Format("{0},{1},{2}",

@@ -45,3 +45,8 @@ D:\res_Projekat_Biznis\WebApplication1\Testovi\obj\Debug\Testovi.csproj.CoreComp
 D:\res_Projekat_Biznis\WebApplication1\Testovi\obj\Debug\Testovi.csproj.CopyComplete
 D:\res_Projekat_Biznis\WebApplication1\Testovi\obj\Debug\Testovi.dll
 D:\res_Projekat_Biznis\WebApplication1\Testovi\obj\Debug\Testovi.pdb
+D:\res_Projekat_Biznis\WebApplication1\Testovi\bin\Debug\Testovi.dll.config
+D:\res_Projekat_Biznis\WebApplication1\Testovi\bin\Debug\EntityFramework.SqlServer.dll
+D:\res_Projekat_Biznis\WebApplication1\Testovi\bin\Debug\EntityFrameworkExtension.dll
+D:\res_Projekat_Biznis\WebApplication1\Testovi\bin\Debug\System.Data.Entity.dll
+D:\res_Projekat_Biznis\WebApplication1\Testovi\bin\Debug\EntityFramework.SqlServer.xml

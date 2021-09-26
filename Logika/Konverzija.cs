@@ -11,6 +11,9 @@ namespace Logika
     {
         public IEnumerable<PodaciZaPrikaz> ModeliZaPrikaz(IEnumerable<DrzavaWeb> drzave)
         {
+            if (drzave == null)
+                throw new Exception("Lista ne sme biti null");
+
             List<PodaciZaPrikaz> podaci = new List<PodaciZaPrikaz>();
 
             foreach (var d in drzave)
@@ -68,9 +71,5 @@ namespace Logika
             return podaci;
         }
 
-        public IEnumerable<DrzavaWeb> ModeliZaWeb(IEnumerable<PodaciZaPrikaz> podaci)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
