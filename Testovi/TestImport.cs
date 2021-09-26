@@ -115,7 +115,7 @@ namespace Testovi
                 import.LoadPotrosnja(putanjaPotrosnja, "Serbia", DateTime.Parse("05/05/2011"), DateTime.Parse("05/05/2021"));
                 Assert.IsTrue(true);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }

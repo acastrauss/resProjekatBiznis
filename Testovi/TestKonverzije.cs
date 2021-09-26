@@ -13,7 +13,6 @@ namespace Testovi
     public class TestKonverzije
     {
         private IKonverzija konverzija;
-        private List<PodaciZaPrikaz> lista;
         [SetUp]
         public void SetUp()
         {
@@ -80,13 +79,14 @@ namespace Testovi
                         Vremena = new List<VremeWeb>(){
                             new VremeWeb(1,1,10,33.33,11,11,DateTime.Parse("05/05/2016")),
                             new VremeWeb(1,1,10,33.33,11,11,DateTime.Parse("05/05/2016")),
-                            new VremeWeb(1,1,10,33.33,11,11,DateTime.Parse("05/05/2016"))
+                            new VremeWeb(1,1,10,33.33,11,11,DateTime.Parse("05/05/2016")),
                         },
                         Potrosnje = new List<PotrsonjaWeb>()
                         {
                             new PotrsonjaWeb(1,1,22.22,DateTime.Parse("05/05/2016")),
                             new PotrsonjaWeb(1,1,22.22,DateTime.Parse("05/05/2016")),
-                            new PotrsonjaWeb(1,1,22.22,DateTime.Parse("05/05/2016"))
+                            new PotrsonjaWeb(1,1,22.22,DateTime.Parse("05/05/2016")),
+                            new PotrsonjaWeb(1,1,22.22,DateTime.Parse("05/05/2013"))
                         }
                     }
                 }
@@ -108,7 +108,8 @@ namespace Testovi
                 if (!(
                     (data.NazivDrzave == "Serbia") &&
                     (data.KolicinaEnergije == 22.22 || data.KolicinaEnergije == null) &&
-                    (DateTime.Compare((DateTime)data.DatumUTC, new DateTime(2016, 5, 5)) == 0) &&
+                    (DateTime.Compare((DateTime)data.DatumUTC, new DateTime(2016, 5, 5)) == 0 ||
+                    DateTime.Compare((DateTime)data.DatumUTC, new DateTime(2013, 5, 5)) == 0) &&
                     (data.Temperatura == 10 || data.Temperatura == null) &&
                     (data.BrzinaVetra == 11 || data.BrzinaVetra == null) &&
                     (data.Pritisak == 33.33 || data.Pritisak == null) &&

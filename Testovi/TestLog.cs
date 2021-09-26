@@ -32,7 +32,7 @@ namespace Testovi
                 log.AddLog(lp);
                 Assert.IsTrue(true);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }

@@ -1,4 +1,5 @@
-﻿using Modeli.WebModeli;
+﻿using Modeli;
+using Modeli.WebModeli;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,17 @@ namespace Logika
         public IEnumerable<PodaciZaPrikaz> ModeliZaPrikaz(IEnumerable<DrzavaWeb> drzave)
         {
             if (drzave == null)
+            {
+                ILogPisanje logPisanje = new LogPisanje();
+                logPisanje.AddLog(new LogPodatak()
+                {
+                    LogTime = DateTime.Now,
+                    Message = String.Format("Greska prilikom konverzije"
+                        ),
+                    Type = LOG_TYPE.ERROR
+                });
                 throw new Exception("Lista ne sme biti null");
+            }
 
             List<PodaciZaPrikaz> podaci = new List<PodaciZaPrikaz>();
 

@@ -9,6 +9,7 @@ using Microsoft.VisualBasic.FileIO;
 using ExcelDataReader;
 using System.IO;
 using System.Data;
+using Modeli;
 
 namespace Logika
 {
@@ -28,10 +29,30 @@ namespace Logika
         public void LoadPotrosnja(string fajl, string drzava, DateTime DatumPocetka, DateTime DatumKraja)
         {
             if (String.IsNullOrEmpty(fajl))
+            {
+                ILogPisanje logPisanje = new LogPisanje();
+                logPisanje.AddLog(new LogPodatak()
+                {
+                    LogTime = DateTime.Now,
+                    Message = String.Format("Nije prosledjen validan fajl"
+                        ),
+                    Type = LOG_TYPE.ERROR
+                });
                 throw new Exception("Fajl ne sme biti null");
+            }
 
             if (String.IsNullOrEmpty(drzava))
+            {
+                ILogPisanje logPisanje = new LogPisanje();
+                logPisanje.AddLog(new LogPodatak()
+                {
+                    LogTime = DateTime.Now,
+                    Message = String.Format("Nije prosledjen naziv drzave"
+                        ),
+                    Type = LOG_TYPE.ERROR
+                });
                 throw new Exception("Drzava ne sme biti null");
+            }
 
             IBPPristup bpcrud = new BPPristup();
                 
@@ -110,8 +131,17 @@ namespace Logika
                 }    
 
                 if (potrosnje.Count == 0)
+                {
+                    ILogPisanje logPisanje = new LogPisanje();
+                    logPisanje.AddLog(new LogPodatak()
+                    {
+                        LogTime = DateTime.Now,
+                        Message = String.Format("Greska prilikom importa"
+                            ),
+                        Type = LOG_TYPE.ERROR
+                    });
                     throw new Exception("Funkcija nije odradila posao");
-
+                }
                 bpcrud.DodajPotrosnjuDrzave(potrosnje, drzava);
             }
         }
@@ -119,10 +149,30 @@ namespace Logika
         public void LoadVreme(string fajl, string drzava, DateTime DatumPocetka, DateTime DatumKraja)
         {
             if (String.IsNullOrEmpty(fajl))
+            {
+                ILogPisanje logPisanje = new LogPisanje();
+                logPisanje.AddLog(new LogPodatak()
+                {
+                    LogTime = DateTime.Now,
+                    Message = String.Format("Nije prosledjen validan fajl"
+                        ),
+                    Type = LOG_TYPE.ERROR
+                });
                 throw new Exception("Fajl ne sme biti null");
+            }
 
             if (String.IsNullOrEmpty(drzava))
+            {
+                ILogPisanje logPisanje = new LogPisanje();
+                logPisanje.AddLog(new LogPodatak()
+                {
+                    LogTime = DateTime.Now,
+                    Message = String.Format("Nije prosledjen naziv drzave"
+                        ),
+                    Type = LOG_TYPE.ERROR
+                });
                 throw new Exception("Drzava ne sme biti null");
+            }
 
             IBPPristup bpcrud = new BPPristup();
 
@@ -164,7 +214,17 @@ namespace Logika
                 }
 
                 if (vremena.Count == 0)
+                {
+                    ILogPisanje logPisanje = new LogPisanje();
+                    logPisanje.AddLog(new LogPodatak()
+                    {
+                        LogTime = DateTime.Now,
+                        Message = String.Format("Greska prilikom importa"
+                            ),
+                        Type = LOG_TYPE.ERROR
+                    });
                     throw new Exception("Funkcija nije odradila posao");
+                }
 
                 bpcrud.DodajVremenaDrzave(vremena, drzava);
             }

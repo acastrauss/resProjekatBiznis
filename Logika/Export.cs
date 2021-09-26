@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using Modeli;
 using Modeli.WebModeli;
 
 namespace Logika
@@ -13,23 +15,51 @@ namespace Logika
         public string SaveData(IEnumerable<PodaciZaPrikaz> podaci)
         {
             if (podaci == null)
+            {
+                ILogPisanje logPisanje = new LogPisanje();
+                logPisanje.AddLog(new LogPodatak()
+                {
+                    LogTime = DateTime.Now,
+                    Message = String.Format("Greska prilikom eksporta, nisu prosledjeni podaci"
+                        ),
+                    Type = LOG_TYPE.ERROR
+                });
                 throw new Exception("Lista ne moze biti prazna niti null");
-
+            }
             if (podaci.Count() == 0)
+            {
+                ILogPisanje logPisanje = new LogPisanje();
+                logPisanje.AddLog(new LogPodatak()
+                {
+                    LogTime = DateTime.Now,
+                    Message = String.Format("Greska prilikom eksporta, nisu prosledjeni podaci"
+                        ),
+                    Type = LOG_TYPE.ERROR
+                });
                 throw new Exception("Lista ne moze biti prazna niti null");
+            }
 
-            var putanja = Directory.GetCurrentDirectory();//System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-            var arr = putanja.Split('\\').ToList();
-            arr.Remove(arr.Last());
-            arr.Remove(arr.First());
-            var p = String.Join("\\", arr);
-            string a = "Output_" + DateTime.Now.ToString("yyy_MM_d_HH_mm") + ".csv";
-            string putanjaPuna = System.IO.Path.Combine(putanja, "WebApplication1\\CSVFiles", a);
-            //putanjaPuna = putanjaPuna.Substring(6, putanjaPuna.Length - 6);
-            
-            //using (var csvWrite = File.OpenText(putanjaPuna))
-            //{
-                foreach (var red in podaci)
+            String putanjaPuna = String.Empty;
+
+            if (HttpContext.Current == null)
+            {
+                var putanja = Directory.GetCurrentDirectory();//System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+                var arr = putanja.Split('\\').ToList();
+                arr.Remove(arr.Last());
+                arr.Remove(arr.First());
+                var p = String.Join("\\", arr);
+                string a = "Output_" + DateTime.Now.ToString("yyy_MM_d_HHmm") + ".csv";
+                putanjaPuna = System.IO.Path.Combine(putanja, "WebApplication1\\CSVFiles", a);
+            }
+            else
+            {
+                string a = "Output" + DateTime.Now.ToString("yyy_MM_d_HH_mm") + ".csv";
+
+                putanjaPuna = HttpContext.Current.Server.MapPath("~/CSVFiles");
+                putanjaPuna = Path.Combine(putanjaPuna, a);
+            }
+
+            foreach (var red in podaci)
                 {
                     string vrsta = "";
 

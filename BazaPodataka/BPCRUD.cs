@@ -13,7 +13,7 @@ namespace BazaPodataka
         public void DodajDrzavu(string naziv, string kratakNaziv)
         {
             int id = IdZaDrzavu(naziv);
-            if (id == -1)
+            if (id != -1)
                 throw new Exception("Drzava vec postoji.");
 
             using (var db = new Drzave())
@@ -118,8 +118,8 @@ namespace BazaPodataka
         {
             var retVal = String.Empty;
 
-            using (var db = new Drzave())
             {
+            using (var db = new Drzave())
                 retVal = db.KratkiNaziviDrzavas.Where(x => x.PunNaziv == punoImeDrzave).FirstOrDefault().KratakNaziv;
             }
 

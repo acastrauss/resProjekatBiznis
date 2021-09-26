@@ -25,7 +25,39 @@ $(document).ready(function () {
 
     $('#dodajDrzavuBtn').click(function () {
         $.ajax({
+            url: 'api/Index/DodajDrzavu',
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'text',
+            data: JSON.stringify({
+                naziv: $('#dodajDrzavuText').val()
+            }),
+            success: function (data) {
+                alert(`Dodata:${data}`);
+                $('#dodajDrzavuText').val('');
+            },  
+            error: function (err) {
+                alert(err);
+            }
+        });
+    });
 
+    $('#logBtn').click(function () {
+        $.ajax({
+            url: 'api/Index/GetLogFile',
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                var blob = new Blob([data]);
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'Log On_' + new String(new Date()) + '.csv';
+                link.click();
+            },
+            error: function (error) {
+                alert(JSON.stringify(error));
+            }
         });
     });
 

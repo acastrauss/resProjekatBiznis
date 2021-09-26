@@ -21,9 +21,23 @@ namespace WebApplication1
     {
         [HttpPost]
         [Route("api/Index/DodajDrzavu")]
-        public IHttpActionResult DodajDrzavu([FromBody]string naziv)
+        public IHttpActionResult DodajDrzavu([FromBody]object podaci)
         {
+            try
+            {
+                var nazivDic = JsonConvert.DeserializeObject<Dictionary<string, string>>(podaci.ToString());
+                var naziv = nazivDic["naziv"];
 
+                IBPPristup bp = new BPPristup();
+                var kratakNaziv = bp.KratakNazivDrzave(naziv);
+                bp.DodajDrzavu(naziv, kratakNaziv);
+
+                return Ok(naziv);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e.InnerException);
+            }
         }
 
 
@@ -58,6 +72,19 @@ namespace WebApplication1
             
             return Ok(alltext);
         }
+
+        // GET api/<controller>
+        [HttpGet]
+        [Route("api/Index/GetLogFile")]
+        public IHttpActionResult GetLogFile()
+        {
+            var fname = HttpContext.Current.Server.MapPath("~/LogFile/Log.csv");
+
+            var alltext = File.ReadAllText(fname);
+
+            return Ok(alltext);
+        }
+
 
         // GET api/<controller>/5
         [HttpGet]

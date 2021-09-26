@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BazaPodataka;
 using Modeli;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Logika
 {
+    [ExcludeFromCodeCoverage]
     public class BPPristup : IBPPristup
     {
         public void DodajPotrosnjuDrzave(IEnumerable<PotrsonjaWeb> potrosnje, string drzava)
